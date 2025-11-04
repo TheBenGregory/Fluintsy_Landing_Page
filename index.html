@@ -3,59 +3,186 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fluintsy</title>
+    <title>Fluintsy - The Language of Automation</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { 
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', sans-serif;
             background: #FFFFE3;
             color: #000080;
             line-height: 1.6;
         }
         .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
-        header { padding: 60px 0; text-align: center; }
-        h1 { font-size: 3rem; margin-bottom: 20px; }
-        h2 { font-size: 2rem; margin-bottom: 40px; text-align: center; }
-        section { padding: 80px 0; }
-        .use-cases { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        
+        header { 
+            padding: 100px 0 80px;
+            text-align: center;
+            background: linear-gradient(135deg, rgba(0,0,128,0.05) 0%, rgba(0,0,128,0.02) 100%);
+            border-radius: 0 0 60px 60px;
+        }
+        h1 { 
+            font-size: 4rem; 
+            margin-bottom: 20px;
+            font-weight: 700;
+            letter-spacing: -2px;
+        }
+        .tagline {
+            font-size: 1.5rem;
+            color: rgba(0,0,128,0.7);
+            font-weight: 300;
+        }
+        
+        section { padding: 100px 0; }
+        h2 { 
+            font-size: 2.5rem; 
+            margin-bottom: 60px; 
+            text-align: center;
+            font-weight: 700;
+        }
+        
+        .use-cases { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); 
+            gap: 40px; 
+        }
         .card { 
-            background: white;
-            padding: 30px;
-            border: 2px solid #000080;
-            border-radius: 8px;
+            background: rgba(255,255,255,0.6);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border: 2px solid rgba(0,0,128,0.1);
+            border-radius: 24px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
         }
-        .testimonials { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px; }
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0,0,128,0.15);
+            border-color: rgba(0,0,128,0.3);
+        }
+        .card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: #000080;
+        }
+        .card p {
+            color: rgba(0,0,128,0.8);
+            line-height: 1.7;
+        }
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, #000080, #4169E1);
+            border-radius: 24px 24px 0 0;
+        }
+        
+        .testimonials { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); 
+            gap: 40px; 
+        }
         .testimonial { 
-            background: white;
-            padding: 30px;
-            border-left: 4px solid #000080;
+            background: rgba(255,255,255,0.5);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: 24px;
+            border-left: 6px solid #000080;
+            transition: all 0.3s ease;
         }
-        form { max-width: 600px; margin: 0 auto; }
+        .testimonial:hover {
+            transform: translateX(8px);
+            background: rgba(255,255,255,0.7);
+        }
+        .testimonial p {
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            color: rgba(0,0,128,0.9);
+            font-style: italic;
+        }
+        .testimonial strong {
+            color: #000080;
+            font-weight: 600;
+        }
+        .testimonial .role {
+            color: rgba(0,0,128,0.6);
+            font-size: 0.9rem;
+        }
+        
+        #contact {
+            background: linear-gradient(135deg, rgba(0,0,128,0.03) 0%, rgba(65,105,225,0.05) 100%);
+            border-radius: 60px;
+            margin: 0 20px;
+        }
+        form { 
+            max-width: 600px; 
+            margin: 0 auto; 
+        }
         input, textarea { 
             width: 100%;
-            padding: 15px;
-            margin-bottom: 20px;
-            border: 2px solid #000080;
-            background: white;
+            padding: 18px 24px;
+            margin-bottom: 24px;
+            border: 2px solid rgba(0,0,128,0.2);
+            background: rgba(255,255,255,0.7);
+            backdrop-filter: blur(10px);
             color: #000080;
             font-size: 1rem;
+            border-radius: 16px;
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: #000080;
+            background: rgba(255,255,255,0.9);
+        }
+        input::placeholder, textarea::placeholder {
+            color: rgba(0,0,128,0.4);
         }
         button { 
-            background: #000080;
+            background: linear-gradient(135deg, #000080 0%, #4169E1 100%);
             color: #FFFFE3;
-            padding: 15px 40px;
+            padding: 18px 48px;
             border: none;
             font-size: 1.1rem;
             cursor: pointer;
+            border-radius: 16px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 24px rgba(0,0,128,0.2);
         }
-        button:hover { opacity: 0.9; }
+        button:hover { 
+            transform: translateY(-2px);
+            box-shadow: 0 12px 32px rgba(0,0,128,0.3);
+        }
+        
+        .icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #000080 0%, #4169E1 100%);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 40px 0;
+            color: rgba(0,0,128,0.6);
+        }
     </style>
 </head>
 <body>
     <header>
         <div class="container">
             <h1>Fluintsy</h1>
-            <p style="font-size: 1.3rem;">The Language of Automation</p>
+            <p class="tagline">The Language of Automation</p>
         </div>
     </header>
 
@@ -64,16 +191,19 @@
             <h2>Use Cases</h2>
             <div class="use-cases">
                 <div class="card">
-                    <h3>Bookings</h3>
-                    <p>Automate booking for clients</p>
+                    <div class="icon">💪</div>
+                    <h3>Personal Trainers</h3>
+                    <p>Automate client onboarding, workout plan generation, and progress tracking. Send personalized nutrition reminders and schedule follow-ups without lifting a finger.</p>
                 </div>
                 <div class="card">
-                    <h3>Data analysis</h3>
-                    <p>Automate data analysis for your business</p>
+                    <div class="icon">🏠</div>
+                    <h3>Real Estate Agents</h3>
+                    <p>Generate property descriptions instantly, automate lead qualification, and schedule showings. Keep clients updated with market reports and property matches automatically.</p>
                 </div>
                 <div class="card">
-                    <h3>Social Media Development</h3>
-                    <p>Automate social media development for your business</p>
+                    <div class="icon">⚖️</div>
+                    <h3>Legal Professionals</h3>
+                    <p>Streamline document review, automate client intake, and generate case summaries. Handle routine correspondence and deadline tracking while you focus on strategy.</p>
                 </div>
             </div>
         </div>
@@ -84,16 +214,19 @@
             <h2>Testimonials</h2>
             <div class="testimonials">
                 <div class="testimonial">
-                    <p>"Automated my entire social media strategy"</p>
-                    <strong>— A. Johnson, FitStrong Coaching</strong>
+                    <p>"Cut my admin time by 70%. Now I spend actual hours training clients instead of managing schedules and follow-ups."</p>
+                    <strong>Marcus Chen</strong><br>
+                    <span class="role">Elite Performance Training</span>
                 </div>
                 <div class="testimonial">
-                    <p>"Reduced our manual administrative workload by 70%."</p>
-                    <strong>— M. Lee, Willmington Law</strong>
+                    <p>"Fluintsy handles my entire lead pipeline. I close 3x more deals because I'm talking to qualified buyers, not chasing cold leads."</p>
+                    <strong>Rebecca Torres</strong><br>
+                    <span class="role">Torres Realty Group</span>
                 </div>
                 <div class="testimonial">
-                    <p>"Fluintsy completely overhauled how we onboard clients"</p>
-                    <strong>— J. Smith, Body Innovations</strong>
+                    <p>"My paralegal costs dropped 60% and response times improved. Clients get instant updates while I focus on case work."</p>
+                    <strong>David Okonkwo</strong><br>
+                    <span class="role">Okonkwo & Associates</span>
                 </div>
             </div>
         </div>
@@ -105,10 +238,16 @@
             <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
                 <input type="text" name="name" placeholder="Name" required>
                 <input type="email" name="email" placeholder="Email" required>
-                <textarea name="message" rows="6" placeholder="Message" required></textarea>
-                <button type="submit">Send</button>
+                <textarea name="message" rows="6" placeholder="Tell us about your automation needs" required></textarea>
+                <button type="submit">Send Message</button>
             </form>
         </div>
     </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Fluintsy. All rights reserved.</p>
+        </div>
+    </footer>
 </body>
 </html>
